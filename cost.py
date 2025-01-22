@@ -16,6 +16,15 @@ electronics['Category'] = 'Electronics'
 # Combine the datasets
 df = pd.concat([daily_products, electronics], ignore_index=True)
 
+@app.route('/')
+def index():
+    return render_template('priceList.html')
+
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
+
 @app.route('/products')
 def get_products():
     """Return the full list of products."""
