@@ -6,8 +6,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Load CSV files
-daily_products = pd.read_csv('/home/modabbir/Desktop/priceList/Daily_Use_Products_List.csv')
-electronics = pd.read_csv('/home/modabbir/Desktop/priceList/Electronic_Products_List.csv')
+daily_products = pd.read_csv('Daily_Use_Products_List.csv')
+electronics = pd.read_csv('Electronic_Products_List.csv')
 
 # Add a 'Category' column to each dataset
 daily_products['Category'] = 'Daily Basis Use'
