@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    .filter-container { margin-top: 20px; }
+    .filter { margin-right: 15px; }
+  </style>
+</head>
+<body>
+  <h1>Product List</h1>
+
+  <!-- Search Box -->
+  <input type="text" id="searchInput" placeholder="Search by Product Name..." onkeyup="applyFilters()" />
+
+  <!-- Filters -->
+  <div class="filter-container">
+    <label class="filter">
+      Min Price: <input type="number" id="minPrice" placeholder="Min" oninput="applyFilters()" />
+    </label>
+    <label class="filter">
+      Max Price: <input type="number" id="maxPrice" placeholder="Max" oninput="applyFilters()" />
+    </label>
+    <label class="filter">
+      Category:
+      <select id="categoryFilter" onchange="applyFilters()">
+        <option value="All Categories">All Categories</option>
+        <option value="Daily Basis Use">Daily Basis Use</option>
+        <option value="Electronics">Electronics</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- Table -->
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Average Price (USD)</th>
+        <th>Price Range (USD)</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be dynamically generated -->
+    </tbody>
+  </table>
+
+  <script>
+    // Fetch all products on page load
+    document.addEventListener("DOMContentLoaded", fetchAllProducts);
+
+    function fetchAllProducts() {
+      fetch("http://127.0.0.1:5000/products")
+        .then(response => response.json())
+        .then(data => loadTable(data))
+        .catch(error => console.error("Error fetching all products:", error));
+    }
+
+    // Apply search and filters
+    function applyFilters() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
+      const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
+      const category = document.getElementById("categoryFilter").value;
+
+      // Fetch filtered data
+      fetch(`http://127.0.0.1:5000/search?q=${query}&min=${minPrice}&max=${maxPrice}&category=${category}`)
+        .then(response => response.json())
+        .then(data => loadTable(data))
+        .catch(error => console.error("Error fetching filtered data:", error));
+    }
+
+
+    // Load data into the table
+    function loadTable(data) {
+      const tbody = document.querySelector("#productTable tbody");
+      tbody.innerHTML = ""; // Clear the table
+
+      data.forEach(product => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${product["Product Name"]}</td>
+          <td>${product["Average Price (USD)"]}</td>
+          <td>${product["Price Range (USD)"]}</td>
+          <td>${product["Category"]}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
