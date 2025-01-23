@@ -18,7 +18,9 @@
   <h1>Product List</h1>
 
   <!-- Search Box -->
-  <input type="text" id="searchInput" placeholder="Search by Product Name..." onkeyup="applyFilters()" />
+  <div class="search-container">
+    <input type="text" class="search-box" id="searchInput" placeholder="Search by Product Name..." onkeyup="applyFilters()" />
+  </div>
 
   <!-- Filters -->
   <div class="filter-container">
@@ -48,7 +50,7 @@
         <th>Category</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="product_table_body">
       <!-- Rows will be dynamically generated -->
     </tbody>
   </table>
