@@ -23,27 +23,78 @@ h1 {
     color: #4CAF50;
 }
 
-/* Styling for the product table */
+/* Center the search box on the page */
+.search-container {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 20px auto; /* Space around the search container */
+}
+
+/* Style the search box */
+.search-box {
+    width: 50%; /* Make the search box wider */
+    padding: 12px 20px; /* Add padding for a larger look */
+    font-size: 18px; /* Increase font size */
+    border: 2px solid #4CAF50; /* Add a border */
+    border-radius: 8px; /* Rounded corners */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: all 0.3s ease-in-out; /* Smooth transition on focus */
+}
+
+/* Change the border and shadow on focus */
+.search-box:focus {
+    border-color: #45a049; /* Darker green border on focus */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+}
+
+/* General styles for the table */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    width: 90%;
+    margin: 50px auto; /* Center the table and add some space from the top */
+    border-collapse: separate;
+    border-spacing: 0; /* Ensure no gaps between table cells */
+    border-radius: 12px; /* Rounded corners for the table */
+    overflow: hidden; /* Prevent content from overflowing the corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Floating shadow effect */
+    background-color: #ffffff; /* Table background */
 }
 
-th, td {
+/* Table header styling */
+thead th {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    font-weight: bold;
+    text-align: left;
     padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+    font-size: 18px;
 }
 
-th {
-    background-color: #4CAF50;
-    color: white;
+/* Table body styling */
+tbody td {
+    padding: 10px 12px; /* Cell padding */
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+    font-size: 16px;
+    color: #333; /* Text color */
 }
 
-/* Adding hover effect to table rows */
-tr:hover {
-    background-color: #f5f5f5;
+/* Last row without a border */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover effect on rows */
+tbody tr:hover {
+    background-color: #f5f5f5; /* Light gray hover effect */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    table {
+        width: 100%; /* Full width for smaller devices */
+        font-size: 14px; /* Smaller font size */
+    }
 }
 
 /* Styling for filters (select dropdown and input box) */
